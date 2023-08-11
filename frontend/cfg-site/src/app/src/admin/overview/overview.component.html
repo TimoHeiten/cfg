@@ -1,0 +1,22 @@
+<div class="key-value-form">
+  <form [formGroup]="keyValueForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="keyInput">Key:</label>
+      <input
+        type="text"
+        id="keyInput"
+        formControlName="key"
+        placeholder="Enter a key"
+      />
+    </div>
+    <button type="submit">Check Value</button>
+  </form>
+
+  <div *ngIf="data$ | async as data">
+    <h2>Fetched Data:</h2>
+    <div>
+      <p>Key: {{ data.key }}</p>
+      <p>Value: {{ data.value }}</p>
+    </div>
+  </div>
+</div>
