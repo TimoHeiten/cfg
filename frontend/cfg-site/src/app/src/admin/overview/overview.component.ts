@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReadConfigService } from '../services/read-config.service';
+import { ConfigDataService } from '../services/read-config.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ConfigValue } from '../model/configValue';
@@ -11,15 +11,17 @@ import { ConfigValue } from '../model/configValue';
 })
 export class OverviewComponent implements OnInit {
   keyValueForm: FormGroup;
-  public data$: Observable<ConfigValue> = this.readConfig.currentKeySelected$;
+  public data$: Observable<ConfigValue> = this.configDataService.currentKeySelected$;
+  public allValues$: Observable<ConfigValue[]> = this.configDataService.allConfigValues$;
 
-  constructor(private readConfig: ReadConfigService, private formBuilder: FormBuilder) {
+  constructor(private configDataService: ConfigDataService, private formBuilder: FormBuilder) {
     this.keyValueForm = this.formBuilder.group({
       key: '',
     });
   }
 
   ngOnInit(): void {
+    this.configDataService.all();
   }
 
   onSubmit(): void {
@@ -29,6 +31,10 @@ export class OverviewComponent implements OnInit {
     if (!inputValue) {
         return; // todo validate instead
     }
-    this.readConfig.getByValue(inputValue.value);
+    this.configDataService.getByValue(inputValue.value);
+  }
+
+  deleteValue(key: string): void {
+    this.configDataService.delete(key);
   }
 }

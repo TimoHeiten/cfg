@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OverviewComponent } from './src/admin/overview/overview.component';
-import { ReadConfigService } from './src/admin/services/read-config.service';
+import { ConfigDataService } from './src/admin/services/read-config.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    ReadConfigService
+    ConfigDataService
   ],
   bootstrap: [AppComponent]
 })

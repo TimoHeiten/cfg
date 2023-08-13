@@ -20,3 +20,14 @@
     </div>
   </div>
 </div>
+
+<div>
+    <h2>Available ConfigValues:</h2>
+    <ul>
+        <li *ngFor="let value of allValues$ | async">
+            <p> {{ value.key }} - {{ value.value }} 
+                <button (click)="deleteValue(value.key)">Delete</button>
+            </p>
+        </li>
+    </ul>
+</div>

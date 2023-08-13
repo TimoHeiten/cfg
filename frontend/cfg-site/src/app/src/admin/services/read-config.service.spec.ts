@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ReadConfigService } from './read-config.service';
+import { ConfigDataService } from './read-config.service';
 
 describe('ReadConfigService', () => {
-  let service: ReadConfigService;
+  let service: ConfigDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ReadConfigService);
+    service = TestBed.inject(ConfigDataService);
   });
 
   it('should be created', () => {

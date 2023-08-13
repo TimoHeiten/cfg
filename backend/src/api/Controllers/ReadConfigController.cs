@@ -14,6 +14,11 @@ namespace cfg.api.Controllers
             _dataProvider = dataProvider;
         }
 
+        /// <summary>
+        /// Get a specific configuration value by key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         [HttpGet("{key}")]
         public async Task<ActionResult> Get(string key)
         {
@@ -25,5 +30,16 @@ namespace cfg.api.Controllers
 
             return Ok(value);
         }
+
+        /// <summary>
+        /// Get all currently stored configuration values
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var values = await _dataProvider.GetAllAsync();
+            return Ok(values);
+        } 
     }
 }

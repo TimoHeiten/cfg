@@ -1,4 +1,5 @@
 using cfg.api.ConfigurationData;
+using cfg.api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +10,12 @@ builder.Services.AddScoped<IConfigurationDataProvider, ConfigurationDataProvider
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "cfg-site",
-        builder =>
+        configure =>
         {
-            builder.WithOrigins("http://localhost:4200", "https://localhost:4201")
+            configure.WithOrigins("http://localhost:4200", "https://localhost:4201")
                 .AllowAnyHeader()
-                .WithMethods("GET, PATCH, DELETE, PUT, POST, OPTIONS");
+                .AllowAnyMethod();
+            //.WithMethods("GET, PATCH, DELETE, PUT, POST, OPTIONS");
         });
 });
 
@@ -28,6 +30,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseCors("cfg-site");
 
 app.Run();
